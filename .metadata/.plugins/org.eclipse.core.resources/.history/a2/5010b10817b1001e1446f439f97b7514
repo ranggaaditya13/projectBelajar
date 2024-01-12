@@ -1,0 +1,32 @@
+package com.rangga.belajar.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.rangga.belajar.models.userModel;
+import com.rangga.belajar.repositories.userRepository;
+
+@Service
+@Transactional
+public class userService {
+	
+	@Autowired
+	private userRepository ur;
+	
+	public List<userModel> dataAll(){
+		return ur.findAll();
+	}
+	
+	public userModel tambahUser(@RequestBody userModel user) {
+		userModel temp = new userModel();
+		temp.setNama(user.getNama());
+		temp.setNomor_telepon(user.getNomor_telepon());
+		temp.setId_buku(0);
+		return ur.save(temp);
+	}
+
+}

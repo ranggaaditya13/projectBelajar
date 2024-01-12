@@ -1,0 +1,32 @@
+package com.rangga.belajar.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.rangga.belajar.models.bukuModel;
+import com.rangga.belajar.repositories.bukuRepository;
+
+@Service
+@Transactional
+public class bukuService {
+	
+	@Autowired
+	private bukuRepository br;
+	
+	public List<bukuModel> dataAll(){
+		return br.findAll();
+	}
+	
+	public bukuModel tambahBuku (bukuModel model) {
+		bukuModel temp = new bukuModel();
+		temp.setJudul(model.getJudul());
+		temp.setPenulis(model.getPenulis());
+		temp.setPenerbit(model.getPenerbit());
+		temp.setKetersediaan(true);
+		return br.save(temp);
+	}
+
+}
